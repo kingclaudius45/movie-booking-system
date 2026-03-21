@@ -1,0 +1,18 @@
+<nav class="flex justify-between p-4 bg-black text-white">
+  <h1 class="font-bold">🎬 Movie App</h1>
+
+  <!-- NOT logged in -->
+  <div *ngIf="!(isLoggedIn$ | async)">
+    <a routerLink="/login" class="mr-4">Login</a>
+    <a routerLink="/register">Register</a>
+  </div>
+
+  <!-- Logged in -->
+  <div *ngIf="isLoggedIn$ | async">
+    <button (click)="logout()" class="bg-red-500 px-3 py-1 rounded">
+      Logout
+    </button>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

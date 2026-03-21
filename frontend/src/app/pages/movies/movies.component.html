@@ -1,0 +1,17 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-6">Now Showing 🎬</h2>
+
+  <div class="grid grid-cols-4 gap-6">
+    <div *ngFor="let movie of movies" class="bg-white shadow rounded-lg p-3">
+      
+      <img [src]="movie.posterUrl" class="h-60 w-full object-cover rounded">
+
+      <h3 class="mt-2 font-semibold">{{ movie.title }}</h3>
+
+      <p class="text-sm text-gray-500">
+        {{ movie.genre }} | {{ movie.language }}
+      </p>
+
+    </div>
+  </div>
+</div>

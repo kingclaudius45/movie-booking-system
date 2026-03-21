@@ -1,0 +1,24 @@
+<div class="flex justify-center mt-20">
+  <div class="w-96 p-6 shadow-lg rounded-lg bg-white">
+
+    <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
+
+    <input [(ngModel)]="formData.name" placeholder="Name"
+      class="w-full mb-3 p-2 border rounded" />
+
+    <input [(ngModel)]="formData.email" placeholder="Email"
+      class="w-full mb-3 p-2 border rounded" />
+
+    <input [(ngModel)]="formData.password" type="password" placeholder="Password"
+      class="w-full mb-3 p-2 border rounded" />
+
+    <input [(ngModel)]="formData.phone" placeholder="Phone"
+      class="w-full mb-3 p-2 border rounded" />
+
+    <button (click)="register()"
+      class="w-full bg-red-500 text-white p-2 rounded">
+      Register
+    </button>
+
+  </div>
+</div>
