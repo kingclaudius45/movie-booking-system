@@ -1,0 +1,29 @@
+<div *ngIf="movie" class="p-10">
+
+  <div class="flex gap-10">
+
+    <img [src]="movie.posterUrl" class="w-80 rounded shadow">
+
+    <div>
+      <h1 class="text-4xl font-bold">{{ movie.title }}</h1>
+
+      <p class="mt-4 text-gray-600">
+        {{ movie.description }}
+      </p>
+
+      <p class="mt-2">
+        🎭 {{ movie.genre }} | 🌐 {{ movie.language }}
+      </p>
+
+      <p class="mt-2">
+        ⏱ {{ movie.duration }} mins
+      </p>
+
+      <button class="mt-6 bg-red-500 text-white px-6 py-2 rounded">
+        Book Tickets 🎟️
+      </button>
+    </div>
+
+  </div>
+
+</div>

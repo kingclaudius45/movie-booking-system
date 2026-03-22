@@ -12,13 +12,15 @@ import { FormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MoviesComponent
+    MoviesComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,

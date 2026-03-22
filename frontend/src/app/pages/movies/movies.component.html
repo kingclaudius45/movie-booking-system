@@ -2,7 +2,7 @@
   <h2 class="text-2xl font-bold mb-6">Now Showing 🎬</h2>
 
   <div class="grid grid-cols-4 gap-6">
-    <div *ngFor="let movie of movies" class="bg-white shadow rounded-lg p-3">
+    <div *ngFor="let movie of movies" [routerLink]="['/movies', movie._id]" class="bg-white shadow rounded-lg p-3">
       
       <img [src]="movie.posterUrl" class="h-60 w-full object-cover rounded">
 
