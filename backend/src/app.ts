@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes";
 import movieRoutes from "./routes/movieRoutes";
+import showRoutes from './routes/showRoutes';
+import bookingRoutes from "./routes/bookingRoutes";
 
 const app = express();
 
@@ -14,5 +16,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
+
+app.use("/api/shows", showRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 export default app; 
