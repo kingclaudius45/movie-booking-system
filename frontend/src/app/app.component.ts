@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
+import { Route, Router, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent {
   isLoggedIn$!: Observable<boolean>;
 
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private route: Router) {
     this.isLogged = auth.isLoggedIn();
   }
 
@@ -24,5 +25,6 @@ export class AppComponent {
 
   logout() {
     this.auth.logout();
+    this.route.navigate(['/']);
   }
 }
