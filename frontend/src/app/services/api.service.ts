@@ -31,4 +31,12 @@ export class ApiService {
       }
     });
   }
+
+  getShows(movieId: string) {
+    return this.http.get(`${this.baseUrl}/shows/${movieId}`);
+  }
+
+  bookSeats(data: any) {
+    return this.http.post(`${this.baseUrl}/bookings`, data);
+  }
 }

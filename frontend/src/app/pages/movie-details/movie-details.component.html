@@ -27,3 +27,49 @@
   </div>
 
 </div>
+
+<div class="mt-10">
+
+  <h2 class="text-xl font-bold mb-4">Select Show Time ⏰</h2>
+
+  <div class="flex gap-4">
+    <button
+      *ngFor="let show of shows"
+      (click)="selectShow(show)"
+      class="px-4 py-2 border rounded hover:bg-red-500 hover:text-white"
+    >
+      {{ show.showTime | date:'shortTime' }}
+    </button>
+  </div>
+
+</div>
+
+<div *ngIf="selectedShow" class="mt-10">
+
+  <h2 class="text-xl font-bold mb-4">Select Seats 🎟️</h2>
+
+  <div class="grid grid-cols-10 gap-2 max-w-xl">
+
+    <div
+      *ngFor="let seat of [].constructor(selectedShow.totalSeats); let i = index"
+      (click)="toggleSeat(i + 1)"
+      [ngClass]="{
+        'bg-gray-300': isBooked(i + 1),
+        'bg-green-500 text-white': isSelected(i + 1),
+        'bg-white': !isBooked(i + 1)
+      }"
+      class="p-2 text-center border rounded cursor-pointer"
+    >
+      {{ i + 1 }}
+    </div>
+
+  </div>
+
+  <button
+    (click)="bookSeats()"
+    class="mt-6 bg-red-500 text-white px-6 py-2 rounded"
+  >
+    Book Selected Seats
+  </button>
+
+</div>
