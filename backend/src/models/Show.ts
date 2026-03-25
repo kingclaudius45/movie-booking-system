@@ -5,6 +5,11 @@ export interface IShow extends Document {
   showTime: Date;
   totalSeats: number;
   bookedSeats: number[];
+  lockedSeats: {
+    seatNumber: number;
+    user: mongoose.Types.ObjectId | undefined;
+    lockUntil: Date;
+}[];
 }
 
 const showSchema = new Schema<IShow>({
@@ -26,6 +31,16 @@ const showSchema = new Schema<IShow>({
       type: Number,
     },
   ],
+  lockedSeats: [
+  {
+    seatNumber: Number,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    lockUntil: Date,
+  },
+],
 });
 
 const Show = mongoose.model<IShow>("Show", showSchema);
