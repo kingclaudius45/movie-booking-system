@@ -9,10 +9,12 @@ import { MoviesComponent } from './pages/movies/movies.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { MyBookingsComponent } from './pages/my-bookings/my-bookings.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     LoginComponent,
     RegisterComponent,
     MoviesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MyBookingsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DatePipe
   ],
   providers: [
     {

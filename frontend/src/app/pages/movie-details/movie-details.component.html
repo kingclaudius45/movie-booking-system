@@ -1,17 +1,19 @@
-<div *ngIf="movie" class="p-10">
+<div *ngIf="movie" class="bg-gray-100 min-h-screen p-8">
 
   <div class="flex gap-10">
 
-    <img [src]="movie.posterUrl" class="w-80 rounded shadow">
+    <img [src]="movie.posterUrl"
+      class="w-72 rounded-lg shadow-xl">
 
     <div>
+
       <h1 class="text-4xl font-bold">{{ movie.title }}</h1>
 
-      <p class="mt-4 text-gray-600">
+      <p class="mt-4 text-gray-600 max-w-xl">
         {{ movie.description }}
       </p>
 
-      <p class="mt-2">
+      <p class="mt-3">
         🎭 {{ movie.genre }} | 🌐 {{ movie.language }}
       </p>
 
@@ -19,57 +21,72 @@
         ⏱ {{ movie.duration }} mins
       </p>
 
-      <button class="mt-6 bg-red-500 text-white px-6 py-2 rounded">
-        Book Tickets 🎟️
-      </button>
     </div>
 
   </div>
 
-</div>
+  <!-- Show timings -->
+  <div class="mt-10">
 
-<div class="mt-10">
+    <h2 class="text-xl font-bold mb-4">Select Show Time</h2>
 
-  <h2 class="text-xl font-bold mb-4">Select Show Time ⏰</h2>
+    <div class="flex gap-4">
 
-  <div class="flex gap-4">
-    <button
-      *ngFor="let show of shows"
-      (click)="selectShow(show)"
-      class="px-4 py-2 border rounded hover:bg-red-500 hover:text-white"
-    >
-      {{ show.showTime | date:'shortTime' }}
-    </button>
+      <button
+        *ngFor="let show of shows"
+        (click)="selectShow(show)"
+        class="px-5 py-2 border rounded-full hover:bg-red-500 hover:text-white transition"
+      >
+        {{ show.showTime | date:'shortTime' }}
+      </button>
+
+    </div>
+
   </div>
 
-</div>
+  <!-- Seats -->
+  <div *ngIf="selectedShow" class="mt-10">
 
-<div *ngIf="selectedShow" class="mt-10">
+    <h2 class="text-xl font-bold mb-4 text-center">Screen</h2>
 
-  <h2 class="text-xl font-bold mb-4">Select Seats 🎟️</h2>
+    <div class="bg-gray-300 h-2 w-96 mx-auto mb-6 rounded"></div>
 
-  <div class="grid grid-cols-10 gap-2 max-w-xl">
+    <div class="grid grid-cols-10 gap-2 max-w-xl mx-auto">
 
-    <div
-      *ngFor="let seat of [].constructor(selectedShow.totalSeats); let i = index"
-      (click)="toggleSeat(i + 1)"
-      [ngClass]="{
-        'bg-gray-300': isBooked(i + 1),
+      <div
+        *ngFor="let seat of [].constructor(selectedShow.totalSeats); let i = index"
+        (click)="toggleSeat(i + 1)"
+        [ngClass]="{
+        'bg-gray-400': isBooked(i + 1),
+        'bg-yellow-400': isLocked(i + 1),
         'bg-green-500 text-white': isSelected(i + 1),
         'bg-white': !isBooked(i + 1)
       }"
-      class="p-2 text-center border rounded cursor-pointer"
-    >
-      {{ i + 1 }}
+        class="p-2 text-center border rounded cursor-pointer transition"
+      >
+        {{ i + 1 }}
+      </div>
+
     </div>
+
+    <div class="mt-6 flex gap-4">
+
+    <button
+      (click)="lockSeats()"
+      class="bg-yellow-500 px-4 py-2 text-white rounded"
+    >
+      Lock Seats
+    </button>
+
+    <button
+      (click)="confirmBooking()"
+      class="bg-green-600 px-4 py-2 text-white rounded"
+    >
+      Confirm Booking
+    </button>
 
   </div>
 
-  <button
-    (click)="bookSeats()"
-    class="mt-6 bg-red-500 text-white px-6 py-2 rounded"
-  >
-    Book Selected Seats
-  </button>
+  </div>
 
 </div>

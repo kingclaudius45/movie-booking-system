@@ -12,6 +12,7 @@ export class MovieDetailsComponent implements OnInit {
   shows: any[] = [];
   selectedShow: any = null;
   selectedSeats: number[] = [];
+  lockTime: Date | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,12 @@ export class MovieDetailsComponent implements OnInit {
     this.api.getShows(id!).subscribe((res: any) => {
       this.shows = res.data;
     });
+  }
+
+  isLocked(seat: number): boolean {
+    return this.selectedShow.lockedSeats?.some(
+      (lock: any) => lock.seatNumber === seat
+    );
   }
 
   selectShow(show: any) {
@@ -53,18 +60,66 @@ toggleSeat(seat: number) {
     this.selectedSeats.push(seat);
   }
 }
+
 bookSeats() {
   const payload = {
     showId: this.selectedShow._id,
     seats: this.selectedSeats
   };
 
-  this.api.bookSeats(payload).subscribe((res: any) => {
-    alert('Booking successful 🎉');
+  if (payload.seats.length){
+    this.api.bookSeats(payload).subscribe((res: any) => {
+      alert('Booking successful 🎉');
 
     // refresh seats
     this.selectedShow.bookedSeats.push(...this.selectedSeats);
     this.selectedSeats = [];
   });
+  }
+
+  
 }
+
+ lockSeats() {
+    if (this.selectedSeats.length === 0) {
+      alert("Select seats first");
+      return;
+    }
+
+    const payload = {
+      showId: this.selectedShow._id,
+      seats: this.selectedSeats
+    };
+
+    this.api.lockSeats(payload).subscribe((res: any) => {
+      alert("Seats locked for 5 minutes ⏳");
+      this.lockTime = res.lockUntil;
+
+      // update UI
+      this.selectedShow.lockedSeats = [
+        ...(this.selectedShow.lockedSeats || []),
+        ...this.selectedSeats.map(seat => ({
+          seatNumber: seat
+        }))
+      ];
+    });
+  }
+confirmBooking() {
+    const payload = {
+      showId: this.selectedShow._id,
+      seats: this.selectedSeats
+    };
+
+    this.api.confirmBooking(payload).subscribe(() => {
+      alert("Booking confirmed 🎉");
+
+      // update UI
+      this.selectedShow.bookedSeats.push(...this.selectedSeats);
+
+      this.selectedSeats = [];
+    });
+  }
+
+
+  
 }

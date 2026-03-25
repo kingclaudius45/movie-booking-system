@@ -39,4 +39,16 @@ export class ApiService {
   bookSeats(data: any) {
     return this.http.post(`${this.baseUrl}/bookings`, data);
   }
+
+  getMyBookings() {
+  return this.http.get(`${this.baseUrl}/bookings/my`);
+}
+
+lockSeats(data: any) {
+  return this.http.post(`${this.baseUrl}/bookings/lock`, data);
+}
+
+confirmBooking(data: any) {
+  return this.http.post(`${this.baseUrl}/bookings/confirm`, data);
+}
 }
